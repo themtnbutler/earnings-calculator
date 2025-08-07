@@ -4,7 +4,7 @@
   
   <input type="number" id="propertyCount" placeholder="e.g. 25" style="padding: 10px; width: 80%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px;" />
 
-  <button onclick="calculateEarnings()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">Calculate</button>
+  <button id="calculateBtn" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">Calculate</button>
 
   <div id="result" style="margin-top: 20px; font-size: 1.2em; font-weight: bold; color: #2c3e50;"></div>
 
@@ -39,4 +39,7 @@
     resultDiv.innerText = `You could earn $${earnings.toLocaleString()} per year!`;
     explanationDiv.style.display = "block";
   }
+
+  // Attach event listener to button
+  document.getElementById('calculateBtn').addEventListener('click', calculateEarnings);
 </script>
