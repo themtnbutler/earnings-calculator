@@ -1,0 +1,42 @@
+<div style="max-width: 420px; margin: auto; padding: 20px; border-radius: 12px; background: #f9f9f9; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: Arial, sans-serif; text-align: center;">
+  <h2 style="color: #333;">💰 Earnings Calculator</h2>
+  <p style="margin-bottom: 20px;">See how much you could earn by partnering with us. Just enter how many properties you manage:</p>
+  
+  <input type="number" id="propertyCount" placeholder="e.g. 25" style="padding: 10px; width: 80%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px;" />
+
+  <button onclick="calculateEarnings()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">Calculate</button>
+
+  <div id="result" style="margin-top: 20px; font-size: 1.2em; font-weight: bold; color: #2c3e50;"></div>
+
+  <div id="explanation" style="margin-top: 25px; font-size: 0.95em; color: #555; text-align: left; line-height: 1.5; display: none;">
+    <hr style="margin: 20px 0;">
+    <strong>How we got this:</strong>
+    <p>
+      We assume your properties are booked most of the year, and $10 adds up quickly! We estimate that even with only 30% of your bookings staying an average of 3–4 nights, you can start earning real money quickly!
+    </p>
+  </div>
+</div>
+
+<script>
+  function calculateEarnings() {
+    const properties = parseInt(document.getElementById('propertyCount').value);
+    const resultDiv = document.getElementById('result');
+    const explanationDiv = document.getElementById('explanation');
+
+    if (isNaN(properties) || properties <= 0) {
+      resultDiv.innerText = "Please enter the number of properties you manage.";
+      explanationDiv.style.display = "none";
+      return;
+    }
+
+    const bookingsPerYear = Math.round(292 / 3); // ~97 bookings/year
+    const usageRate = 0.3; // 30% use the service
+    const payoutPerOrder = 10;
+
+    const totalOrdersPerProperty = Math.round(bookingsPerYear * usageRate);
+    const earnings = properties * totalOrdersPerProperty * payoutPerOrder;
+
+    resultDiv.innerText = `You could earn $${earnings.toLocaleString()} per year!`;
+    explanationDiv.style.display = "block";
+  }
+</script>
