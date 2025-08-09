@@ -32,12 +32,29 @@
 </div>
 
 <script>
-  function calculateEarnings() {
-    const properties = parseInt(document.getElementById('propertyCount').value);
-    const resultDiv = document.getElementById('result');
-    const explanationDiv = document.getElementById('explanation');
+  document.addEventListener('DOMContentLoaded', function () {
+    function calculateEarnings() {
+      const properties = parseInt(document.getElementById('propertyCount').value);
+      const resultDiv = document.getElementById('result');
+      const explanationDiv = document.getElementById('explanation');
 
-    if (isNaN(properties) || properties <= 0) {
-      resultDiv.innerHTML = "Please enter the number of properties you manage.";
-      explanationDiv.style.display = "none";
-      return;
+      if (isNaN(properties) || properties <= 0) {
+        resultDiv.innerHTML = "Please enter the number of properties you manage.";
+        explanationDiv.style.display = "none";
+        return;
+      }
+
+      const bookingsPerYear = Math.round(292 / 3.5); // ~83 bookings/year
+      const usageRate = 0.3; // 30% use the service
+      const payoutPerOrder = 20; // $20 commission
+
+      const totalOrdersPerProperty = Math.round(bookingsPerYear * usageRate);
+      const earnings = properties * totalOrdersPerProperty * payoutPerOrder;
+
+      resultDiv.innerHTML = `You could earn <span style="color: #27ae60; font-size: 2em;">$${earnings.toLocaleString()}</span> per year!`;
+      explanationDiv.style.display = "block";
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateEarnings);
+  });
+</script>
